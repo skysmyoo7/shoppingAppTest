@@ -2,7 +2,7 @@ package screen
 
 import extensions.getNotEmptyString
 
-class ShoppingHome {
+class ShoppingHome : Screen() {
 
     fun start(){
         showWelcomeMessage()
@@ -10,6 +10,8 @@ class ShoppingHome {
     }
 
     private fun showWelcomeMessage() {
+        ScreenStack.push(this)
+
         println("이름을 입력해주세요.")
         val userName = readLine().getNotEmptyString()
         println("$userName 님 환영합니다.")
