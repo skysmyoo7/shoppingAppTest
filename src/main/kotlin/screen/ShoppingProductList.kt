@@ -1,5 +1,6 @@
 package screen
 
+import LINE_DIVIDER
 import data.CartsItems
 import data.Product
 import extensions.getNotEmptyInt
@@ -27,7 +28,7 @@ class ShoppingProductList {
         val categoryProduct = categories[selectedCategory]
         if (!categoryProduct.isNullOrEmpty()) {
             println("""
-                ================================
+                $LINE_DIVIDER
                 선택하신 [$selectedCategory] 카테고리 상품입니다.
             """.trimIndent())
 
@@ -35,30 +36,30 @@ class ShoppingProductList {
                 println("${index} . ${product.name}")
 
             }
-            showCartOption(categoryProduct,selectedCategory)
+            showCartOption(categoryProduct, selectedCategory)
         } else {
             showEmptyProductMessage(selectedCategory)
         }
     }
 
-    private fun showCartOption(categoryProduct: List<Product>,selectedCategory : String) {
+    private fun showCartOption(categoryProduct: List<Product>, selectedCategory: String) {
         println("""
-            ===================================
+$LINE_DIVIDER
             장바구니에 담을 상품 번호를 선택해주세요.
         """.trimIndent()
         )
 
         val selectedIndex = readLine().getNotEmptyInt()
-        categoryProduct.getOrNull(selectedIndex)?.let{product ->
+        categoryProduct.getOrNull(selectedIndex)?.let { product ->
             CartsItems.addProduct(product)
             println("=> 장바구니로 이동하시려면 #을, 계속 쇼핑하시려면 *을 입력해주세요. ")
             val answer = readLine().getNotEmptyString()
-            if(answer == "#"){
+            if (answer == "#") {
                 val shoppingCart = ShoppingCart()
                 shoppingCart.showCartItems()
-            }else if(answer == "*"){
+            } else if (answer == "*") {
                 showProducts(selectedCategory)
-            } else{
+            } else {
                 //TODO
             }
         }
